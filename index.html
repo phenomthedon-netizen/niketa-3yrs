@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 3 Years ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#000;color:white;overflow-x:hidden;}
+
+/* ENTER */
+#enter-screen{
+position:fixed;width:100%;height:100vh;background:black;
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+z-index:9999;text-align:center;
+}
+#enter-screen h1{
+font-family:'Playfair Display';font-size:3rem;color:gold;text-shadow:0 0 20px gold;
+}
+#enter-screen button{
+margin-top:30px;padding:15px 40px;font-size:1.2rem;
+background:gold;border:none;border-radius:30px;cursor:pointer;font-weight:bold;
+}
+
+/* PASSWORD */
+#lockScreen{
+display:none;height:100vh;justify-content:center;align-items:center;
+background:radial-gradient(circle,#140016,#000);
+}
+.lockCard{
+background:rgba(255,255,255,0.05);
+padding:40px;border-radius:20px;
+backdrop-filter:blur(12px);
+text-align:center;
+box-shadow:0 0 40px rgba(255,215,0,0.3);
+}
+.lockCard input{
+padding:12px;margin-top:15px;border:none;border-radius:10px;text-align:center;
+}
+.lockCard button{
+margin-top:15px;padding:10px 25px;border:none;background:gold;
+color:black;border-radius:10px;cursor:pointer;
+}
+
+/* HERO */
+#hero{
+height:100vh;background:radial-gradient(circle at bottom,#1a001f,#000);
+display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+}
+#hero h1{
+font-size:3.5rem;font-family:'Playfair Display';
+text-shadow:0 0 20px gold,0 0 40px hotpink;
+}
+#daysCounter{
+margin-top:30px;font-size:3rem;font-family:'Playfair Display';
+color:gold;text-shadow:0 0 20px gold;
+}
+
+/* SLIDESHOW */
+.slideshow-container{
+max-width:650px;margin:60px auto;position:relative;
+padding:20px;border-radius:20px;background:rgba(255,255,255,0.05);
+backdrop-filter:blur(8px);
+}
+.slide{display:none;text-align:center;}
+.slide img{
+width:100%;max-height:650px;object-fit:contain;background:black;
+border-radius:20px;box-shadow:0 0 30px rgba(255,215,0,0.4);
+transition:transform 4s ease;
+}
+.slide.active img{transform:scale(1.05);}
+.caption{margin-top:20px;font-size:1.2rem;color:gold;}
+
+.prev,.next{
+cursor:pointer;position:absolute;top:45%;padding:16px;
+color:gold;font-weight:bold;font-size:22px;transition:0.3s;
+}
+.next{right:0;}
+.prev{left:0;}
+.prev:hover,.next:hover{color:white;transform:scale(1.2);}
+
+.dots-container{text-align:center;margin-top:20px;}
+.dot{
+height:12px;width:12px;margin:0 5px;
+background-color:rgba(255,215,0,0.4);
+border-radius:50%;display:inline-block;
+transition:0.3s;cursor:pointer;
+}
+.dot.active{background-color:gold;box-shadow:0 0 10px gold;}
+
+.video-gallery{
+display:flex;
+gap:25px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:60px;
+}
+.video-card{
+width:280px;
+cursor:pointer;
+transition:0.3s;
+text-align:center;
+}
+.video-card video{
+width:100%;
+border-radius:20px;
+box-shadow:0 0 25px rgba(255,215,0,0.4);
+}
+.video-card p{
+margin-top:12px;
+color:gold;
+}
+.video-card:hover{
+transform:scale(1.05);
+}
+
+.romantic-btn{
+padding:12px 30px;margin:15px;
+background:gold;border:none;border-radius:30px;
+font-size:1rem;cursor:pointer;font-weight:bold;transition:0.3s;
+}
+.romantic-btn:hover{transform:scale(1.1);box-shadow:0 0 20px gold;}
+
+#seal{
+width:120px;height:120px;background:radial-gradient(circle,#8b0000,#4b0000);
+border-radius:50%;margin:40px auto;
+display:flex;align-items:center;justify-content:center;
+color:white;font-family:'Playfair Display';
+font-size:1.2rem;cursor:pointer;
+transition:transform 1s ease, opacity 1s ease;
+box-shadow:0 0 20px rgba(255,0,0,0.6);
+}
+#seal.open{transform:scale(3);opacity:0;}
+
+#letterWrapper{
+display:none;
+max-width:900px;
+margin:60px auto;
+padding:60px;
+background:linear-gradient(#fdf6e3,#f7e8c6);
+color:#3b2f2f;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,215,0,0.4);
+font-family:'Playfair Display';
+}
+#letterContent{
+font-size:1.35rem;
+line-height:2.1;
+white-space:pre-wrap;
+overflow:hidden;
+border-right:3px solid #3b2f2f;
+}
+
+.heart{
+position:fixed;bottom:-10px;font-size:18px;
+animation:floatUp 10s linear infinite;opacity:0.8;pointer-events:none;
+}
+@keyframes floatUp{
+0%{transform:translateY(0) scale(1);}
+100%{transform:translateY(-110vh) scale(1.6);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bg-music" loop>
+<source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
+<div id="enter-screen">
+<h1>Three Years. One Love. ❤️</h1>
+<button onclick="enterSite()">Open Our 3‑Year Story 🤍</button>
+</div>
+
+<div id="lockScreen">
+<div class="lockCard">
+<h2>The day you made someone the happiest in the world…</h2>
+<p>Hint: DDMM</p>
+<input type="password" id="password">
+<br>
+<button onclick="checkPassword()">Unlock</button>
+<p id="error" style="margin-top:10px;color:pink;"></p>
+</div>
+</div>
+
+<div id="mainContent" style="display:none;">
+
+<section id="hero">
+<h1>Happy 3 Years, My Love ❤️</h1>
+<div id="daysCounter">0</div>
+<p>7 July 2023 — 7 July 2026</p>
+</section>
+
+<section>
+<h2 style="text-align:center;font-family:'Playfair Display';color:gold;">Our Beautiful Memories ✨</h2>
+<div class="slideshow-container" onmouseover="pauseSlides()" onmouseout="resumeSlides()">
+
+<div class="slide"><img src="images/kiss.jpg"><div class="caption">First Kiss ❤️</div></div>
+<div class="slide"><img src="images/hug.jpg"><div class="caption">First Hug 🤍</div></div>
+<div class="slide"><img src="images/cuddle.jpg"><div class="caption">Our Peace ✨</div></div>
+<div class="slide"><img src="images/date.jpg"><div class="caption">Cinematic Night 🌙</div></div>
+<div class="slide"><img src="images/birthday.jpg"><div class="caption">My Queen 👑</div></div>
+
+<div class="slide"><img src="images/selfie1.jpg"><div class="caption">How are you this unreal? 🤍</div></div>
+<div class="slide"><img src="images/selfie2.jpg"><div class="caption">My forever princess ✨</div></div>
+<div class="slide"><img src="images/mirrorhug.jpg"><div class="caption">Just us. Just love. ❤️</div></div>
+<div class="slide"><img src="images/anime.jpg"><div class="caption">Our cute little world 🌸</div></div>
+<div class="slide"><img src="images/yellowpose.jpg"><div class="caption">Still obsessed with you 💛</div></div>
+<div class="slide"><img src="images/greenpose.jpg"><div class="caption">Every angle. Every moment. Mine 🤍</div></div>
+
+<a class="prev" onclick="plusSlides(-1)">❮</a>
+<a class="next" onclick="plusSlides(1)">❯</a>
+
+<div class="dots-container">
+<span class="dot" onclick="currentSlide(1)"></span>
+<span class="dot" onclick="currentSlide(2)"></span>
+<span class="dot" onclick="currentSlide(3)"></span>
+<span class="dot" onclick="currentSlide(4)"></span>
+<span class="dot" onclick="currentSlide(5)"></span>
+<span class="dot" onclick="currentSlide(6)"></span>
+<span class="dot" onclick="currentSlide(7)"></span>
+<span class="dot" onclick="currentSlide(8)"></span>
+<span class="dot" onclick="currentSlide(9)"></span>
+<span class="dot" onclick="currentSlide(10)"></span>
+<span class="dot" onclick="currentSlide(11)"></span>
+</div>
+</div>
+</section>
+
+<section>
+<h2 style="text-align:center;font-family:'Playfair Display';color:gold;">Moments I Never Want To Forget 🎥</h2>
+<div class="video-gallery">
+<div class="video-card" onclick="openVideo('videos/cute3.mp4')">
+<video src="videos/cute3.mp4" muted></video>
+<p>Our Cute Chaos 🤍</p>
+</div>
+<div class="video-card" onclick="openVideo('videos/hand.mp4')">
+<video src="videos/hand.mp4" muted></video>
+<p>Holding You ✨</p>
+</div>
+<div class="video-card" onclick="openVideo('videos/ring.mp4')">
+<video src="videos/ring.mp4" muted></video>
+<p>Future In My Mind 💍</p>
+</div>
+<div class="video-card" onclick="openVideo('videos/prettyy.mp4')">
+<video src="videos/prettyy.mp4" muted></video>
+<p>My Pretty Girl 💖</p>
+</div>
+</div>
+</section>
+
+<div style="text-align:center;margin:100px 0;">
+<button onclick="showSeal()" class="romantic-btn">Sacred 🤍</button>
+</div>
+
+<div id="seal" onclick="openSacred()">OPEN</div>
+
+<div id="letterWrapper">
+<div id="letterContent">
+Niketa,
+
+Three years ago, I didn’t know that one ordinary day could turn into the most important chapter of my life.
+
+But then 7 July happened.
+
+And everything changed.
+
+You didn’t just come into my life.
+You became my life’s peace, my strength, my happiness.
+
+You’ve been there for me through everything.
+Through my highs.
+Through my lows.
+Through moments when I didn’t even understand myself.
+
+And you never judged me.
+You never walked away.
+You stayed.
+
+Through thick and thin.
+
+You made me stronger.
+More confident.
+A better version of myself.
+
+You don’t even realize how much of the man I am today exists because you believed in me.
+
+And the most beautiful part?
+
+Even when you get mad at me.
+Even when you turn into my little dramatic angry bird.
+You still choose me.
+
+Every single time.
+
+That means more to me than you’ll ever know.
+
+22 November…
+
+That moment when we were wrapped in each other’s arms.
+No noise.
+No world.
+No distractions.
+
+Just us.
+
+That was the day I understood something deeply.
+
+You are not just my girlfriend.
+
+You are my home.
+
+When you talk in that baby voice…
+When you look at me so innocently…
+Like I’m your whole world…
+
+You melt me in ways I can’t even explain.
+
+Bittu,
+you are chaos and comfort at the same time.
+Drama and softness in one heartbeat.
+
+And somehow, you’re exactly what my soul needed.
+
+When I imagine my future…
+I don’t see “maybe.”
+
+I see you.
+
+I see you as my wife.
+I see us building a life.
+I see us growing old.
+I see us still laughing at stupid things.
+Still choosing each other.
+
+I don’t say this openly much,
+but what truly makes me feel alive…
+is your presence in my life.
+
+You don’t just make me happy.
+
+You make me feel complete.
+
+Three years.
+Over a thousand days.
+Countless memories.
+
+And I still wake up choosing you.
+
+Not because I have to.
+But because loving you feels natural.
+Effortless.
+Right.
+
+If I am a fish,
+you are my water.
+
+And in every lifetime,
+every universe,
+every version of reality —
+
+I will still look for you.
+
+And I will still choose you.
+
+Forever yours,
+Raj 🤍
+</div>
+
+<div style="text-align:center;margin-top:80px;">
+<h2 style="font-family:'Playfair Display';color:gold;">
+Will You Be My Forever? 💍
+</h2>
+
+<button onclick="foreverYes()" class="romantic-btn">Yes ❤️</button>
+<button onclick="foreverNo()" class="romantic-btn">No 😅</button>
+
+<div id="foreverResponse" style="margin-top:30px;font-size:1.5rem;"></div>
+</div>
+
+</div>
+
+</div>
+
+<div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:9999;flex-direction:column;">
+<video id="modalVideo" controls autoplay style="max-width:90%;max-height:80%;border-radius:20px;"></video>
+<br>
+<button onclick="closeVideo()" class="romantic-btn">Close 🤍</button>
+</div>
+
+<script>
+function enterSite(){
+document.getElementById("enter-screen").style.display="none";
+document.getElementById("lockScreen").style.display="flex";
+document.getElementById("bg-music").volume=0.4;
+document.getElementById("bg-music").play();
+}
+
+function checkPassword(){
+if(document.getElementById("password").value==="0707"){
+document.getElementById("lockScreen").style.display="none";
+document.getElementById("mainContent").style.display="block";
+animateDaysCounter();
+}else{
+document.getElementById("error").innerText="Wrong password 🤍";
+}
+}
+
+function animateDaysCounter(){
+let finalDays=1096;
+let current=0;
+let counter=document.getElementById("daysCounter");
+let interval=setInterval(()=>{
+current+=Math.ceil(finalDays/100);
+if(current>=finalDays){
+current=finalDays;
+clearInterval(interval);
+counter.innerHTML=finalDays+" Days of Us 🤍";
+}else{
+counter.innerHTML=current;
+}
+},25);
+}
+
+let slideIndex=1, slideInterval;
+showSlides(slideIndex); startAutoSlides();
+function plusSlides(n){showSlides(slideIndex+=n);}
+function currentSlide(n){showSlides(slideIndex=n);}
+function showSlides(n){
+let slides=document.getElementsByClassName("slide");
+let dots=document.getElementsByClassName("dot");
+if(n>slides.length) slideIndex=1;
+if(n<1) slideIndex=slides.length;
+for(let i=0;i<slides.length;i++){slides[i].style.display="none";slides[i].classList.remove("active");}
+for(let i=0;i<dots.length;i++){dots[i].classList.remove("active");}
+slides[slideIndex-1].style.display="block";
+slides[slideIndex-1].classList.add("active");
+dots[slideIndex-1].classList.add("active");
+}
+function startAutoSlides(){slideInterval=setInterval(()=>plusSlides(1),4000);}
+function pauseSlides(){clearInterval(slideInterval);}
+function resumeSlides(){startAutoSlides();}
+
+function openVideo(src){
+let modal=document.getElementById("videoModal");
+let video=document.getElementById("modalVideo");
+video.src=src;
+modal.style.display="flex";
+}
+function closeVideo(){
+let modal=document.getElementById("videoModal");
+let video=document.getElementById("modalVideo");
+video.pause();
+video.src="";
+modal.style.display="none";
+}
+
+function showSeal(){document.getElementById("seal").style.display="flex";}
+function openSacred(){
+let seal=document.getElementById("seal");
+seal.classList.add("open");
+setTimeout(()=>{
+seal.style.display="none";
+document.getElementById("letterWrapper").style.display="block";
+document.getElementById("letterWrapper").scrollIntoView({behavior:"smooth"});
+startTypewriter();
+},1000);
+}
+
+function startTypewriter(){
+let element=document.getElementById("letterContent");
+let text=element.innerText;
+element.innerText="";
+let i=0;
+function typing(){
+if(i<text.length){
+element.innerText+=text.charAt(i);
+i++;
+setTimeout(typing,15);
+}}
+typing();
+}
+
+function foreverYes(){
+document.getElementById("foreverResponse").innerHTML="✨ FOREVER STARTS NOW ✨";
+launchConfetti();
+}
+function foreverNo(){
+document.getElementById("foreverResponse").innerHTML="Error. Please choose correctly 😌";
+}
+
+function launchConfetti(){
+for(let i=0;i<60;i++){
+let conf=document.createElement("div");
+conf.innerHTML="✨";
+conf.style.position="fixed";
+conf.style.left=Math.random()*100+"vw";
+conf.style.top="-10px";
+conf.style.fontSize="20px";
+conf.style.animation="fall 3s linear forwards";
+document.body.appendChild(conf);
+setTimeout(()=>conf.remove(),3000);
+}}
+let style=document.createElement('style');
+style.innerHTML=`@keyframes fall{to{transform:translateY(110vh);}}`;
+document.head.appendChild(style);
+
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.innerHTML="🤍";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),10000);
+},600);
+</script>
+
+</body>
+</html>
